@@ -56,8 +56,36 @@ const thoughtController = {
         res.status(500).json(err);
       });
   },
-  updateThought(req, res) {},
-  deleteThought(req, res) {},
+  updateThought({ params, body }, res) {
+    findOneAndUpdate({ _id: params.id }, body, {
+      new: true,
+    })
+      .then((updateThoughtData) => {
+        if (!updateThoughtData) {
+          res.status(404).json({ message: "No User found with this Id!" });
+          return;
+        }
+        res.json(updateThoughtData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
+  deleteThought({ params }, res) {
+    Thought.fondOneAndDelete({ _id: params.id })
+      .then((deleteThoughtData) => {
+        if (!deleteThoughtData) {
+          res.status(404).json({ message: "No User found with this Id!" });
+          return;
+        }
+        res.json(deleteThoughtData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
   addReaction(req, res) {},
   deleteReaction(req, res) {},
 };
