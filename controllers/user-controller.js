@@ -43,8 +43,37 @@ const userController = {
         res.status(500).json(err);
       });
   },
-  updateUser(req, res) {},
-  deleteUser(req, res) {},
+  updateUser({ params, body }, res) {
+    User.findOneAndUpdate({ _id: params.id }, body, {
+      new: true,
+      runValidators: true,
+    })
+      .then((createUserData) => {
+        if (!createUserData) {
+          res.status(404).json({ message: "No user with this id was found!" });
+          return;
+        }
+        res.json(createUserData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
+  deleteUser({params}, res) {
+    User.fondOneAndDelete({ _id: params.id })
+      .then((deleteUserData) => {
+        if (!deleteUserData) {
+          res.status(404).json({ message: "No User found with this Id!" });
+          return;
+        }
+        res.json(deleteUserData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
   addFriend(req, res) {},
   deleteFriend(req, res) {},
 };

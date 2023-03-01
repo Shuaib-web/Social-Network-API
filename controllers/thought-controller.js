@@ -62,7 +62,7 @@ const thoughtController = {
     })
       .then((updateThoughtData) => {
         if (!updateThoughtData) {
-          res.status(404).json({ message: "No User found with this Id!" });
+          res.status(404).json({ message: "No Thought found with this Id!" });
           return;
         }
         res.json(updateThoughtData);
@@ -76,7 +76,7 @@ const thoughtController = {
     Thought.fondOneAndDelete({ _id: params.id })
       .then((deleteThoughtData) => {
         if (!deleteThoughtData) {
-          res.status(404).json({ message: "No User found with this Id!" });
+          res.status(404).json({ message: "No Thought found with this Id!" });
           return;
         }
         res.json(deleteThoughtData);
