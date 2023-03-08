@@ -10,7 +10,7 @@ const {
   deleteFriend,
 } = require("../../controllers/user-controller");
 
-router.route("/users").get(getAllUsers).post(createUser);
+router.route("/").get(getAllUsers).post(createUser);
 
 router.route("/:id").get(getUsersById).put(updateUser).delete(deleteUser);
 
